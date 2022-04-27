@@ -1,3 +1,4 @@
+from tkinter import CENTER
 import pygame
 import time
 import random
@@ -8,7 +9,7 @@ pygame.init()
 
 branco = (255,255,255)
 amarelo = (255,255,100)
-preto = (0,0,0)
+preto = (20,20,20)
 vermelho = (255,0,0)
 verde = (0,255,0)
 azul = (0,0,255)
@@ -42,7 +43,7 @@ def snake(bloco_snake, lista_snake):
 
 def msg(mensagem, color):
     mensagem = fonte.render(mensagem, True, color)
-    screen.blit(mensagem, [screenw / 6, screenh / 3])
+    screen.blit(mensagem, [10, screenh / 2])
 
 # main
 def main():
@@ -65,8 +66,7 @@ def main():
     while not gameover:
         while gameclose == True:
             screen.fill(preto)
-            msg("Você perdeu!\nPressione N para jogar novamente ou Q para sair", vermelho)
-            game_score(snakesize = 1)
+            msg("Você perdeu! Pressione N para jogar novamente ou Q para sair", vermelho)
             pygame.display.update()
         
             # Keypress
@@ -98,6 +98,10 @@ def main():
                 if event.key == pygame.K_UP or event.key == pygame.K_w:
                     x1_change = 0
                     y1_change = -bloco_snake
+                # ESC
+                if event.key == pygame.K_ESCAPE:
+                    gameover = True
+                    gameclose = False
 
         if x1 >= screenw or x1 < 0 or y1 >= screenh or y1 < 0:
             gameclose = True
